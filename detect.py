@@ -1,5 +1,6 @@
 import imgui
 import glfw
+from imgui.integrations.glfw import GlfwRenderer
 from OpenGL.GL import *
 import cv2
 import threading
@@ -105,7 +106,8 @@ class DetectionApp:
         
         # ImGui setup
         imgui.create_context()
-        self.impl = imgui.backends.opengl_glfw_backend.OpenGLGLFWBackend(self.window)
+        # Use GlfwRenderer integration from pyimgui
+        self.impl = GlfwRenderer(self.window)
         imgui.get_io().display_size = (self.window_width, self.window_height)
         
         self._setup_imgui_style()
